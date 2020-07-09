@@ -8,8 +8,8 @@ import {
 
 import './App.scss';
 import Loader from './components/Loader';
-const SearchDetails = React.lazy(() => import('./pages/SearchPage/index'));
-const SearchPage = React.lazy(() => import('./pages/SearchDetails/index'));
+const SearchPage = React.lazy(() => import('./pages/SearchPage/index'));
+const SearchDetails = React.lazy(() => import('./pages/SearchDetails/index'));
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
         <Router>
           <div id="body">
             <Switch>
-              <Route path='/' exact component={SearchDetails} />
-              <Route path='/show=:searchterm' exact component={SearchPage} />
+              <Route path='/' exact component={SearchPage} />
+              <Route path='/show=:searchterm' exact component={SearchDetails} />
             </Switch>
           </div>
         </Router>

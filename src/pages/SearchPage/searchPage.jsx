@@ -13,16 +13,16 @@ const SearchPage = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    const isEmpty = /^(\w+\S+)$/.test(searchTerm);
+    const isEmpty = /^(\w+\S+)$/.test(searchTerm);    
     if (!isEmpty) {
       setError(true);
 
       setTimeout(() => {
         setError(false);
       }, 3000);
+    } else {
+      history.push(`/show=${searchTerm}`);
     }
-
-    history.push(`/show=${searchTerm}`);
   };
 
   return (
@@ -42,9 +42,8 @@ const SearchPage = () => {
               }}
               type="search"
               value={searchTerm}
-              className="inputBox"
+              className="input-box"
               id="site-search"
-              name="q"
               aria-label="Search for your favourite shows"
             />
           </div>

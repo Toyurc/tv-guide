@@ -53,7 +53,8 @@ h5 {
 
 input,
 select,
-textarea {
+textarea,
+button {
   &:focus {
     outline: none;
   }
