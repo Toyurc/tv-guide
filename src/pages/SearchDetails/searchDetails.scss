@@ -10,7 +10,6 @@
   position: fixed;
   width: 100%;
   z-index: 20;
-  // height: 8vh;
   display: grid;
   grid-template-columns: 7vw 60vw 20vw;
   grid-template-rows: 100%;
@@ -64,4 +63,56 @@
   align-items: center;
   flex-direction: column;
   font-size: 2.4rem;
+}
+
+.shows-container {
+  display: grid;
+  grid-template-rows: 38rem 80rem;
+  grid-row-gap: 2rem;
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.shows-wrapper {
+  margin-top: 10vh;
+  // border: .5px solid #000;
+  // border-radius: .5rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.image-wrapper {
+  background-color: #101d2c;
+  >img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.show_details {
+  background-color: #101d2c;
+  color: #f9f7f6;
+  padding: 2rem;
+  overflow-y: scroll;
+  &-summary {
+    font-size: 1.6rem;
+  }
+
+}
+
+.heading--2 {
+  font-family: Libre Franklin;
+  font-style: italic;
+  font-size: 4.8rem;
+  font-weight: 400;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.episodes_details {
+  margin-top: 30vh;
 }
