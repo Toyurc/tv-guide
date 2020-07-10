@@ -111,8 +111,46 @@
 .link {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
 .episodes_details {
   margin-top: 30vh;
+
+  &-card {
+    width: 45rem;
+    height: 20rem;
+    margin: .8rem;
+    display: flex;
+
+    &--image {
+      width: 20rem;
+      height: 20rem;
+      border: 1px solid #CCC;
+      border-radius: .5rem;
+      flex: 3;
+
+      >img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &--text {
+      flex: 2;
+      margin: 2rem;
+      overflow: hidden;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.card {
+  margin: 1rem;
+  text-align: left;
+}
+
+h3{
+  font-size: 1.6rem;
 }

@@ -13,8 +13,10 @@ const SearchDetails = () => {
 
   const [searchTerm, setSearchTerm] = useState(searchterm);
   const [responseObject, setResponseObject] = useState({});
+  const [episodesArray, setEpisodesArray] = useState([]);
+  const [order, setOrder] = useState('ascending');
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);  
 
   const history = useHistory();
 
@@ -27,12 +29,18 @@ const SearchDetails = () => {
         setError(false);
         setLoading(false);
         setResponseObject(response.data);
+        setEpisodesArray(response.data._embedded.episodes);
       })
       .catch((error) => {
         setLoading(false);
         setError(true);
       });
   };
+
+  // FIXME: This doesn't re-render in real time, I am guessing its cos of the size of the array
+  useEffect(() => {
+    order === "descending" && setEpisodesArray(episodesArray.reverse());
+  }, [order]);
 
   useEffect(() => {
     getShows(searchTerm);
@@ -103,8 +111,8 @@ const SearchDetails = () => {
                 </p>
                 <p className="show_details-summary">
                   Genres:{" "}
-                  {responseObject?.genres?.map((genre) => (
-                    <span>{genre},&nbsp;</span>
+                  {responseObject?.genres?.map((genre, index) => (
+                    <span key={index}>{genre},&nbsp;</span>
                   ))}
                 </p>
                 <p className="show_details-summary">
@@ -130,7 +138,46 @@ const SearchDetails = () => {
               </div>
             </div>
             <div className="episodes_details">
-              <h1>Episodes</h1>
+              <h1 className="heading--2">Episodes</h1> 
+              <form>
+                <select onChange={(e) => setOrder(e.target.value)}>
+                  <option value="ascending">Top - Bottom</option>
+                  <option value="descending">Bottom - Top</option>
+                </select>
+              </form>
+              <>
+                {episodesArray?.map((episodes, index) => (
+                  <div className="card" key={index}>
+                    <h3>
+                      Season: {episodes?.season} Episode: {episodes?.number}
+                    </h3>
+                    <div className="episodes_details-card">
+                      <div className="episodes_details-card--image">
+                        <img
+                          src={episodes?.image?.original}
+                          alt={episodes.name}
+                        />
+                      </div>
+                      <div className="episodes_details-card--text">
+                        <p>{strip(episodes.summary)}</p>
+                      </div>
+                    </div>
+                    <h3>
+                      Aired: {episodes?.airdate} {episodes?.airtime} Duration: {episodes?.runtime} mins
+                    </h3>
+                    <h3>
+                      Link:{" "} {episodes?._link?.self?.href}
+                      <a 
+                        className="link" href={episodes?._links?.self?.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >
+                        here
+                      </a>
+                    </h3>
+                  </div>
+                ))}
+              </>
             </div>
           </div>
         )}
