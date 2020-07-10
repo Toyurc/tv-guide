@@ -40,11 +40,11 @@ const SearchDetails = () => {
   // FIXME: This doesn't re-render in real time, I am guessing its cos of the size of the array
   useEffect(() => {
     order === "descending" && setEpisodesArray(episodesArray.reverse());
-  }, [order]);
+  }, [order, episodesArray]);
 
   useEffect(() => {
     getShows(searchTerm);
-  }, []);
+  });
 
   const submitForm = (e) => {
     e.preventDefault();
